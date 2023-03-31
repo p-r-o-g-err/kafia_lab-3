@@ -2,5 +2,6 @@ enum TokenType {
 	Spaces,
 	Identifier,
 	Number,
-	Punctuator
+	Punctuator,
+	EndOfFile
 };

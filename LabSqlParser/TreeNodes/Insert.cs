@@ -1,7 +1,7 @@
 sealed record Insert(
 	Identifier TableName,
 	IExpression Row,
-	IExpression Limit
+	IExpression? Limit = null
 	) : INode {
 	public string ToFormattedString() {
 		var str = $"INSERT INTO {TableName.ToFormattedString()} VALUES ({Row.ToFormattedString()})";

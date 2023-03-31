@@ -39,5 +39,11 @@ static class Program {
 			new Number("6")
 		);
 		Console.WriteLine($"Отформатированная строка: {tree.ToFormattedString()}");
+		Console.WriteLine($"Результат работы парсера:");
+		foreach (var inputString in inputStrings) {
+			var tokens = Lexer.Lexer.GetTokens(inputString);
+			var parsedTree = Parser.Parse(tokens);
+			Console.WriteLine(parsedTree.ToFormattedString());
+		}
 	}
 }

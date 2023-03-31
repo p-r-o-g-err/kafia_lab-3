@@ -16,7 +16,7 @@ static class Lexer {
 			match = match.NextMatch();
 		}
 	}
-	public static IEnumerable<Token>? GetTokens(string input) {
+	public static IEnumerable<Token> GetTokens(string input) {
 		var lastPosition = 0;
 		foreach (var m in GetMatches(lexemeRx, input)) {
 			if (m.Index != lastPosition) {
