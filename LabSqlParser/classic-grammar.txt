@@ -1,0 +1,18 @@
+InsertInto: 'INSERT' 'INTO' Identifier 'VALUES' Row 'LIMIT' Expression
+InsertInto: 'INSERT' 'INTO' Identifier 'VALUES' Row 'LIMIT' 'ALL'
+InsertInto: 'INSERT' 'INTO' Identifier 'VALUES' Row
+Row: '(' Expression ')'
+Expression: ConditionalOr
+ConditionalOr: ConditionalOr 'OR' ConditionalAnd
+ConditionalOr: ConditionalAnd
+ConditionalAnd: ConditionalAnd 'AND' Additive
+ConditionalAnd: Additive
+Additive: Additive '+' Multiplicative
+Additive: Multiplicative
+Multiplicative: Multiplicative '/' Primary
+Multiplicative: Primary
+Primary: '(' Expression ')'
+Primary: Number
+# Стартовый нетерминал: InsertInto
+# Нетерминалы: InsertInto, Row, Expression, ConditionalOr, ConditionalAnd, Additive, Multiplicative, Primary
+# Терминалы: 'INSERT', 'INTO', Identifier, 'VALUES', 'LIMIT', 'ALL', '(', ')', 'OR', 'AND', '+', '/', Number
