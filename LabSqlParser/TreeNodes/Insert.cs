@@ -14,4 +14,7 @@ sealed record Insert(
 		}
 		return insert;
 	}
+	public void AcceptVisitor(INodeVisitor visitor) {
+		visitor.VisitInsert(this);
+	}
 }

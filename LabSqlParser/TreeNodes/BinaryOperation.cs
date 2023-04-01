@@ -15,4 +15,7 @@ sealed record BinaryOperation(
 			_ => throw new System.NotImplementedException($"Для оператора \"{Operator}\" преобразование в строку не определено"),
 		};
 	}
+	public void AcceptVisitor(INodeVisitor visitor) {
+		visitor.VisitBinaryOperation(this);
+	}
 }

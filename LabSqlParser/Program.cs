@@ -46,5 +46,13 @@ static class Program {
 			var parsedTree = Parser.Parse(tokens);
 			Console.WriteLine(parsedTree.ToFormattedString());
 		}
+		Console.WriteLine($"Результат работы визитора:");
+		foreach (var inputString in inputStrings) {
+			var tokens = Lexer.Lexer.GetTokens(inputString);
+			var parsedTree = Parser.Parse(tokens);
+			Console.WriteLine($"Отформатированная строка: {parsedTree.ToFormattedString()}");
+			Console.WriteLine($"Сгенерированный код:");
+			new DebugPrintingVisitor(Console.Out, 2).WriteLine(parsedTree);
+		}
 	}
 }

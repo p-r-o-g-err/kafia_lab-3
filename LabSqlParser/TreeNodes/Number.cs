@@ -4,4 +4,7 @@ sealed record Number(
 	public string ToFormattedString() {
 		return Lexeme;
 	}
+	public void AcceptVisitor(INodeVisitor visitor) {
+		visitor.VisitNumber(this);
+	}
 }
