@@ -1,6 +1,6 @@
 sealed record Parenthesis(
 	IExpression Expression
-	) : IExpression {
+) : IExpression {
 	public string ToFormattedString() {
 		return $"({Expression.ToFormattedString()})";
 	}

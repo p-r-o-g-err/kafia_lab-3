@@ -21,6 +21,11 @@ sealed class Parser {
 		}
 		ReadNextToken();
 	}
+	void Expect(TokenType expectedType) {
+		if (CurrentToken.Type != expectedType) {
+			throw MakeError($"Ожидался тип токена \"{expectedType}\", получен \"{CurrentToken.Type}\"");
+		}
+	}
 	bool SkipIf(string s) {
 		if (CurrentToken.Lexeme == s) {
 			ReadNextToken();
@@ -52,11 +57,17 @@ sealed class Parser {
 		Expect("(");
 		var row = ParseExpression();
 		Expect(")");
+		var limitIsAll = false;
 		IExpression? limit = null;
 		if (SkipIf("LIMIT")) {
-			limit = CurrentToken.Lexeme == "ALL" ? ParseIdentifier() : ParseExpression();
+			if (SkipIf("ALL")) {
+				limitIsAll = true;
+			}
+			else {
+				limit = ParseExpression();
+			}
 		}
-		return new Insert(tableName, row, limit);
+		return new Insert(tableName, row, limitIsAll, limit);
 	}
 	IExpression ParseExpression() {
 		var left = ParseConditionalAnd();
@@ -103,20 +114,15 @@ sealed class Parser {
 		throw MakeError("Ожидалось число или выражение в скобках.");
 	}
 	Identifier ParseIdentifier() {
-		CheckType(TokenType.Identifier);
+		Expect(TokenType.Identifier);
 		var identifier = new Identifier(CurrentToken.Lexeme);
 		ReadNextToken();
 		return identifier;
 	}
 	Number ParseNumber() {
-		CheckType(TokenType.Number);
+		Expect(TokenType.Number);
 		var number = new Number(CurrentToken.Lexeme);
 		ReadNextToken();
 		return number;
-	}
-	void CheckType(TokenType expectedType) {
-		if (CurrentToken.Type != expectedType) {
-			throw MakeError($"Ожидался тип токена \"{expectedType}\", получен \"{CurrentToken.Type}\"");
-		}
 	}
 }

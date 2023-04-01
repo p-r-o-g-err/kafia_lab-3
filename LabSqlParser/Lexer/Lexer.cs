@@ -6,7 +6,7 @@ static class Lexer {
 		"""
 		(?<spaces>[\t\n\r ]+)|
 		(?<identifier>[a-zA-Z_][a-zA-Z0-9_]*)|
-		(?<number>[0-9]+(?=[\t\n\r )\/+]|$))|
+		(?<number>[0-9]+)|
 		(?<punctuator>[()+\/])
 		""", RegexOptions.IgnorePatternWhitespace);
 	static IEnumerable<Match> GetMatches(Regex rx, string input) {

@@ -36,6 +36,7 @@ static class Program {
 					new Number("5")
 				)
 			),
+			false,
 			new Number("6")
 		);
 		Console.WriteLine($"Отформатированная строка: {tree.ToFormattedString()}");

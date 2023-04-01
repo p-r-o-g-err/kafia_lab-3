@@ -1,6 +1,6 @@
 sealed record Number(
 	string Lexeme
-	) : IExpression {
+) : IExpression {
 	public string ToFormattedString() {
 		return Lexeme;
 	}

@@ -1,7 +1,7 @@
 # "INSERT INTO a VALUES ( ( 1 / 2 + 3 AND 4 OR 5 ) ) LIMIT 6",
 # "INSERT INTO a VALUES ( 1 )",
 # "INSERT INTO a VALUES ( 1 ) LIMIT ALL"
-*InsertInto: 'INSERT' 'INTO' Identifier 'VALUES' Row ('LIMIT' Expression | 'ALL')?
+*InsertInto: 'INSERT' 'INTO' Identifier 'VALUES' Row ('LIMIT' (Expression | 'ALL'))?
 Row: '(' Expression ')'
 Expression: ConditionalOr
 ConditionalOr: (ConditionalOr 'OR')? ConditionalAnd

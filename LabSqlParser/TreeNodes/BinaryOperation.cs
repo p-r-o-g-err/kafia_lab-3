@@ -2,7 +2,7 @@ sealed record BinaryOperation(
 	IExpression Left,
 	BinaryOperationType Operator,
 	IExpression Right
-	) : IExpression {
+) : IExpression {
 	public string ToFormattedString() {
 		return $"{Left.ToFormattedString()} {OperatorToString()} {Right.ToFormattedString()}";
 	}
