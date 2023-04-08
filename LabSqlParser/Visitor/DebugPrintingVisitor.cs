@@ -30,24 +30,15 @@ sealed class DebugPrintingVisitor : INodeVisitor {
 			WriteIndent();
 			WriteNode(insert.Row);
 			Write(",\n");
-			if (insert.LimitIsAll) {
-				WriteIndent();
-				Write("true");
-				Write(",\n");
-				WriteIndent();
-				Write($"new {nameof(Identifier)}(\"ALL\")");
+			WriteIndent();
+			Write(insert.LimitIsAll ? "true" : "false");
+			Write(",\n");
+			WriteIndent();
+			if (insert.Limit != null) {
+				WriteNode(insert.Limit);
 			}
 			else {
-				WriteIndent();
-				Write("false");
-				Write(",\n");
-				WriteIndent();
-				if (insert.Limit != null) {
-					WriteNode(insert.Limit);
-				}
-				else {
-					Write("null");
-				}
+				Write("null");
 			}
 			Write("\n");
 			indent -= 1;
